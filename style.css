@@ -72,6 +72,7 @@ body  {
 
 .display__input span {
     height: 100%;
+    display: none;
 }
 
 
@@ -108,7 +109,7 @@ body  {
     &:disabled {
         color: rgb(177, 190, 199);
         background-color: rgb(230, 243, 255);
-        cursor: not-allowed;
+        cursor: auto;
     }
 }
 

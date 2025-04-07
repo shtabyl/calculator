@@ -31,19 +31,22 @@ const clearCalc = () => {
     operator.textContent = '';
     displayEqual.textContent = '';
     displayResult.textContent = '';
-    resultBtn.removeAttribute('disabled');
+    resultBtn.setAttribute('disabled', true);
     operatorBtns.forEach((operator) => operator.removeAttribute('disabled'));
     pointBtn.removeAttribute('disabled');
 }
 
 const getNumber = (input, num) => {
     if (input === pointBtn && num.textContent === '') {
+        num.style.display = 'inline';
         num.textContent += '0.';
         pointBtn.setAttribute('disabled', true);
     } else if (input === pointBtn) {
+        num.style.display = 'inline';
         num.textContent += '.';
         pointBtn.setAttribute('disabled', true);
     } else {
+        num.style.display = 'inline';
         num.textContent += input.textContent;
     }
 }
@@ -56,6 +59,8 @@ numBtns.forEach((number) => number.addEventListener('click', (e) => {
         getNumber(e.target, num1);
     } else {
         getNumber(e.target, num2);
+        operatorBtns.forEach((operator) => operator.setAttribute('disabled', true));
+        resultBtn.removeAttribute('disabled');
     }
 }));
 
@@ -67,8 +72,10 @@ operatorBtns.forEach((operatorBtn) => operatorBtn.addEventListener('click', (e) 
         || operator.textContent === '/') {
             operator.textContent = '';
             operator.textContent += e.target.textContent;
+            operator.style.display = 'inline';
         } else {
             operator.textContent += e.target.textContent;
+            operator.style.display = 'inline';
         }
         pointBtn.removeAttribute('disabled');
     }
@@ -88,6 +95,7 @@ resultBtn.addEventListener('click', (e) => {
     displayEqual.textContent = '=';
     resultBtn.setAttribute('disabled', true);
     pointBtn.removeAttribute('disabled');
+    operatorBtns.forEach((operator) => operator.removeAttribute('disabled'));
     switch (operator.textContent) {
         case '+':
             displayResult.textContent = calculator.add(num1.textContent, num2.textContent);
