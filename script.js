@@ -12,6 +12,10 @@ const calculator = (function () {
     return { add, sub, mul, div };
 })();
 
+const changeVariable = (num1, operator, num2) => {
+    
+}
+
 
 
 
