@@ -13,29 +13,35 @@
     <div class="container">
         <div class="calculator">
             <div class="display">
-
+                <p class="display__input">
+                    <span class="display__num" id="num1"></span>
+                    <span class="display__operator" id="operator"></span>
+                    <span class="display__num" id="num2"></span>
+                </p>
+                <p class="display__equal"></p>
+                <p class="display__result"></p>
             </div>
             <div class="keys__numbers-box numbers">
-                <div class="button button_number">7</div>
-                <div class="button button_number">8</div>
-                <div class="button button_number">9</div>
-                <div class="button button_number">4</div>
-                <div class="button button_number">5</div>
-                <div class="button button_number">6</div>
-                <div class="button button_number">1</div>
-                <div class="button button_number">2</div>
-                <div class="button button_number">3</div>
-                <div class="button button_number button_zero">0</div>
-                <div class="button button_number button_point">.</div>
+                <button class="button button_number">7</button>
+                <button class="button button_number">8</button>
+                <button class="button button_number">9</button>
+                <button class="button button_number">4</button>
+                <button class="button button_number">5</button>
+                <button class="button button_number">6</button>
+                <button class="button button_number">1</button>
+                <button class="button button_number">2</button>
+                <button class="button button_number">3</button>
+                <button class="button button_number button_zero">0</button>
+                <button class="button button_number button_point">.</button>
             </div>
             <div class="keys__operators-box">
-                <div class="button button_operator button_div">/</div>
-                <div class="button button_operator button_mul">*</div>
-                <div class="button button_operator button_sub">-</div>
-                <div class="button button_operator button_add">+</div>
+                <button class="button button_operator button_button">/</button>
+                <button class="button button_operator button_mul">*</button>
+                <button class="button button_operator button_sub">-</button>
+                <button class="button button_operator button_add">+</button>
             </div>
-            <div class="keys__result button button_result">=</div>
-            <div class="keys_clear button button_clear">C</div>
+            <button class="keys__result button button_result">=</button>
+            <button class="keys_clear button button_clear">C</button>
         </div>
     </div>
 </body>

@@ -17,13 +17,15 @@ html {
 }
 
 :root {
-    --clr-dark: rgb(29, 76, 108);
+    font-family: Helvetica, sans-serif;
+    --clr-dark: rgb(51, 88, 113);
+    --clr-border: rgb(128, 165, 190);
 }
 
 body  {
     min-height: 100vh;
     scroll-behavior: smooth;
-    color:var(--clr-dark);
+    color: var(--clr-dark);
 }
 
 .container {
@@ -35,7 +37,7 @@ body  {
 .calculator {
     min-width: 300px;
     min-height: 500px;
-    border: 1px solid var(--clr-dark);
+    border: 1px solid var(--clr-border);
     border-radius: 5px;
     background-color: rgb(230, 243, 255);
     display: grid;
@@ -47,17 +49,26 @@ body  {
 
 .display {
     grid-column: 1 / -1;
-    border: 1px solid var(--clr-dark);;
+    border: 1px solid var(--clr-border);
     border-radius: 5px;
     background-color: rgb(246, 252, 255);
     display: flex;
-    justify-content: flex-end;
-    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
     font-size: 1.5rem;
-    padding: 5px;
+    padding: 5px 12px;
     overflow: hidden;
     word-break: break-all;
+    p {
+        height: 30%;
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
 }
+
 
 .keys__numbers-box {
     grid-column: 1 / -2;
@@ -73,8 +84,8 @@ body  {
 }
 
 .button {
-    font: inherit;
-    border: 1px solid var(--clr-dark);;
+    color: var(--clr-dark);
+    border: 1px solid var(--clr-border);
     border-radius: 5px;
     background-color: rgb(255, 253, 230);
     display: flex;
@@ -89,10 +100,15 @@ body  {
     &:active {
         background-color: white;
     }
+    &:disabled {
+        color: rgb(177, 190, 199);
+        background-color: rgb(230, 243, 255);
+        cursor: not-allowed;
+    }
 }
 
 .button_number {
-    background-color: rgb(147, 212, 255);
+    background-color: rgb(173, 221, 253);
     &:hover {
         background-color: rgb(230, 243, 255);
     }
