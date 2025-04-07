@@ -60,13 +60,18 @@ body  {
     padding: 5px 12px;
     overflow: hidden;
     word-break: break-all;
-    p {
+    div {
         height: 30%;
         width: 100%;
         display: flex;
         justify-content: flex-end;
         align-items: center;
+        gap: 10px;
     }
+}
+
+.display__input span {
+    height: 100%;
 }
 
 

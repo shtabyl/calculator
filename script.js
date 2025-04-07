@@ -18,15 +18,17 @@ const pointBtn = document.querySelector('.button_point');
 
 
 const calculator = (function () {
-    const add = (a, b) => a + b;
-    const sub = (a, b) => a - b;
-    const mul = (a, b) => a * b;
-    const div = (a, b) => a / b;
+    const add = (a, b) => parseFloat(a) + parseFloat(b);
+    const sub = (a, b) => parseFloat(a) - parseFloat(b);
+    const mul = (a, b) => parseFloat(a) * parseFloat(b);
+    const div = (a, b) => parseFloat(a) / parseFloat(b);
     return { add, sub, mul, div };
 })();
 
 const clearCalc = () => {
-    displayInput.textContent = '';
+    num1.textContent = '';
+    num2.textContent = '';
+    operator.textContent = '';
     displayEqual.textContent = '';
     displayResult.textContent = '';
     resultBtn.removeAttribute('disabled');
@@ -34,42 +36,47 @@ const clearCalc = () => {
     pointBtn.removeAttribute('disabled');
 }
 
-// const getNumber = (input) => {
-// }
-
-displayInput.textContent = '';
+const getNumber = (input, num) => {
+    if (input === pointBtn && num.textContent === '') {
+        num.textContent += '0.';
+        pointBtn.setAttribute('disabled', true);
+    } else if (input === pointBtn) {
+        num.textContent += '.';
+        pointBtn.setAttribute('disabled', true);
+    } else {
+        num.textContent += input.textContent;
+    }
+}
 
 numBtns.forEach((number) => number.addEventListener('click', (e) => {
     if (displayResult.textContent !== '') {
         clearCalc();
     }
-    if (e.target === pointBtn && displayInput.textContent === '') {
-        displayInput.textContent += '0';
-        displayInput.textContent += '.';
-        pointBtn.setAttribute('disabled', true);
-    } else if (e.target === pointBtn) {
-        displayInput.textContent += '.';
-        pointBtn.setAttribute('disabled', true);
+    if (operator.textContent === '') {
+        getNumber(e.target, num1);
     } else {
-        displayInput.textContent += e.target.textContent;
+        getNumber(e.target, num2);
     }
 }));
 
-operatorBtns.forEach((operator) => operator.addEventListener('click', (e) => {
-    if (displayInput.textContent !== '') {
-        if (displayInput.textContent.at(-2) === '+' || displayInput.textContent.at(-2)=== '-' || displayInput.textContent.at(-2) === '*' || displayInput.textContent.at(-2) === '/') {
-            displayInput.textContent = displayInput.textContent.slice(0, -2);
-            displayInput.textContent += ' ' + e.target.textContent + ' ';
+operatorBtns.forEach((operatorBtn) => operatorBtn.addEventListener('click', (e) => {
+    if (num1.textContent !== '') {
+        if (operator.textContent === '+' 
+        || operator.textContent === '-' 
+        || operator.textContent === '*' 
+        || operator.textContent === '/') {
+            operator.textContent = '';
+            operator.textContent += e.target.textContent;
         } else {
-            displayInput.textContent += ' ' + e.target.textContent + ' ';
+            operator.textContent += e.target.textContent;
         }
         pointBtn.removeAttribute('disabled');
     }
     if (displayResult.textContent !== '') {
-        const result = displayResult.textContent;
+        const currentResult = displayResult.textContent;
         clearCalc();
-        displayInput.textContent += result;
-        displayInput.textContent += ' ' + e.target.textContent + ' ';
+        num1.textContent += currentResult;
+        operator.textContent += e.target.textContent;
     }
 }));
 
@@ -79,39 +86,28 @@ clearBtn.addEventListener('click', () => {
 
 resultBtn.addEventListener('click', (e) => {
     displayEqual.textContent = '=';
-    displayResult.textContent += 'result';
     resultBtn.setAttribute('disabled', true);
     pointBtn.removeAttribute('disabled');
+    switch (operator.textContent) {
+        case '+':
+            displayResult.textContent = calculator.add(num1.textContent, num2.textContent);
+            break;
+        case '-':
+            displayResult.textContent = calculator.sub(num1.textContent, num2.textContent);
+            break;
+        case '*':
+            displayResult.textContent = calculator.mul(num1.textContent, num2.textContent);
+            break;
+        case '/':
+            if (num2.textContent !== '0') {
+                displayResult.textContent = calculator.div(num1.textContent, num2.textContent);
+            } else {
+                displayResult.textContent = 'Error';
+                operatorBtns.forEach((operator) => operator.setAttribute('disabled', true));
+            }
+            break;
+    }
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
