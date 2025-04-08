@@ -117,7 +117,32 @@ resultBtn.addEventListener('click', (e) => {
     }
 });
 
-
+// Keyboard support
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' || e.key === 'Delete' || e.key.charCodeAt() === 67) {
+        clearCalc();
+    }
+    if (e.key === 'Enter' || e.key === '=' || e.key.charCodeAt() === 61) {
+        resultBtn.click();
+    }
+    if (e.key === '.') {
+        pointBtn.click();
+    }
+    if (e.key >= '0' && e.key <= '9') {
+        numBtns.forEach((number) => {
+            if (number.textContent === e.key) {
+                number.click();
+            }
+        });
+    }
+    if (e.key === '+' || e.key === '-' || e.key === '*' || e.key === '/') {
+        operatorBtns.forEach((operator) => {
+            if (operator.textContent === e.key) {
+                operator.click();
+            }
+        });
+    }
+});
 
 
 

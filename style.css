@@ -35,7 +35,7 @@ body  {
 }
 
 .calculator {
-    min-width: 300px;
+    width: 300px;
     min-height: 500px;
     border: 1px solid var(--clr-border);
     border-radius: 5px;
@@ -73,6 +73,7 @@ body  {
 .display__input span {
     height: 100%;
     display: none;
+    overflow: hidden;
 }
 
 
