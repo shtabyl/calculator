@@ -124,7 +124,7 @@ resultBtn.addEventListener('click', (e) => {
 
 // Keyboard support
 document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' || e.key === 'Delete' || e.key.charCodeAt() === 67) {
+    if (e.key === 'Escape' || e.key === 'Delete' || e.key.charCodeAt() === 67 && e.key !== 'Enter') {
         clearCalc();
     }
     if (e.key === 'Enter' || e.key === '=' || e.key.charCodeAt() === 61) {
