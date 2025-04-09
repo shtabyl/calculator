@@ -146,3 +146,7 @@ body  {
 .button_result {
     grid-column: 1 / 4;
 }
+
+.button_clear {
+    font-size: 1.25rem;
+}
