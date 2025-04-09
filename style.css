@@ -12,6 +12,10 @@
     font: inherit;
 }
 
+*:focus-visible {
+    outline: none;
+}
+
 html {
     color-scheme: dark light;
 }
