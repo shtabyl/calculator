@@ -97,6 +97,7 @@ clearBtn.addEventListener('click', () => {
 });
 
 resultBtn.addEventListener('click', (e) => {
+    displayEqual.style.display = 'inline';
     displayEqual.textContent += '=';
     resultBtn.setAttribute('disabled', true);
     pointBtn.removeAttribute('disabled');
@@ -154,7 +155,7 @@ const moveNum2 = () => {
     if (num1.clientWidth > display.clientWidth * 0.6) {
         if (num2.parentElement === displayInput) {
             const elemToRemove = displayInput.removeChild(num2);
-            displayNumSecondRow.insertBefore(elemToRemove, displayEqual); 
+            displayNumSecondRow.insertBefore(elemToRemove, displayEqual);
         }
     }
 }

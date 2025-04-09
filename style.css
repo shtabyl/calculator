@@ -66,7 +66,7 @@ body  {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    & div {
+    div {
         height: 30%;
         width: 100%;
         display: flex;
@@ -77,19 +77,23 @@ body  {
 }
 
 .display__input span {
-    height: 100%;
     min-width: 1ch;
     max-width: 100%;
     text-align: center;
     display: none;
+    align-items: center;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
 }
 
-.display__equal {
+.display__num_second-row {
     display: flex;
     gap: 10px;
+}
+
+.display__equal {
+    display: none;
 }
 
 .keys__numbers-box {
