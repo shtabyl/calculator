@@ -71,10 +71,7 @@ numBtns.forEach((number) => number.addEventListener('click', (e) => {
 
 operatorBtns.forEach((operatorBtn) => operatorBtn.addEventListener('click', (e) => {
     if (num1.textContent !== '') {
-        if (operator.textContent === '+' 
-        || operator.textContent === '-' 
-        || operator.textContent === '*' 
-        || operator.textContent === '/') {
+        if (operator.textContent) {
             operator.textContent = '';
             operator.textContent += e.target.textContent;
             operator.style.display = 'inline';
