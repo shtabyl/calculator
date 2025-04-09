@@ -22,6 +22,7 @@ html {
 
 :root {
     font-family: Helvetica, sans-serif;
+    font-size: 15px;
     --clr-dark: rgb(51, 88, 113);
     --clr-border: rgb(128, 165, 190);
 }
@@ -63,8 +64,9 @@ body  {
     font-size: 1.5rem;
     padding: 5px 12px;
     overflow: hidden;
-    word-break: break-all;
-    div {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    & div {
         height: 30%;
         width: 100%;
         display: flex;
@@ -76,10 +78,19 @@ body  {
 
 .display__input span {
     height: 100%;
+    min-width: 1ch;
+    max-width: 100%;
+    text-align: center;
     display: none;
     overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
+.display__equal {
+    display: flex;
+    gap: 10px;
+}
 
 .keys__numbers-box {
     grid-column: 1 / -2;

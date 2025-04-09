@@ -7,6 +7,7 @@ const resultBtn = document.querySelector('.button_result');
 
 const display = document.querySelector('.display');
 const displayInput = document.querySelector('.display__input');
+const displayNumSecondRow = document.querySelector('.display__num_second-row');
 const displayEqual = document.querySelector('.display__equal');
 const displayResult = document.querySelector('.display__result');
 const num1 = document.querySelector('#num1');
@@ -27,13 +28,17 @@ const calculator = (function () {
 
 const clearCalc = () => {
     num1.textContent = '';
+    num1.style.display = 'none';
     num2.textContent = '';
+    num2.style.display = 'none';
     operator.textContent = '';
+    operator.style.display = 'none';
     displayEqual.textContent = '';
     displayResult.textContent = '';
     resultBtn.setAttribute('disabled', true);
     operatorBtns.forEach((operator) => operator.removeAttribute('disabled'));
     pointBtn.removeAttribute('disabled');
+    moveNum2Back();
 }
 
 const getNumber = (input, num) => {
@@ -82,9 +87,12 @@ operatorBtns.forEach((operatorBtn) => operatorBtn.addEventListener('click', (e) 
     if (displayResult.textContent !== '') {
         const currentResult = displayResult.textContent;
         clearCalc();
+        num1.style.display = 'inline';
         num1.textContent += currentResult;
+        operator.style.display = 'inline';
         operator.textContent += e.target.textContent;
     }
+    moveNum2();
 }));
 
 clearBtn.addEventListener('click', () => {
@@ -92,7 +100,7 @@ clearBtn.addEventListener('click', () => {
 });
 
 resultBtn.addEventListener('click', (e) => {
-    displayEqual.textContent = '=';
+    displayEqual.textContent += '=';
     resultBtn.setAttribute('disabled', true);
     pointBtn.removeAttribute('disabled');
     operatorBtns.forEach((operator) => operator.removeAttribute('disabled'));
@@ -144,36 +152,21 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
+// Overflow display
+const moveNum2 = () => {
+    if (num1.clientWidth > display.clientWidth * 0.6) {
+        if (num2.parentElement === displayInput) {
+            const elemToRemove = displayInput.removeChild(num2);
+            displayNumSecondRow.insertBefore(elemToRemove, displayEqual); 
+        }
+    }
+}
 
+const moveNum2Back = () => {
+    if (num2.parentElement === displayNumSecondRow) {
+        const elemToRemove = displayNumSecondRow.removeChild(num2);
+        displayInput.appendChild(elemToRemove);
+    }
+}
 
-
-
-
-
-
-
-
-// Parser for more complex input
-// const calcParser = (arr) => {
-//     let sum = parseFloat(arr[0]);
-//     for (let i = 0; i < arr.length - 1; i++) {
-//         if (arr[i] === '+') {
-//             sum = calculator.add(sum, parseFloat(arr[i + 1]));
-//             console.log(sum);
-//         }
-//         if (arr[i] === '-') {
-//             sum = calculator.sub(sum, parseFloat(arr[i + 1]));
-//             console.log(sum);
-//         }
-//         if (arr[i] === '*') {
-//             sum = calculator.mul(sum, parseFloat(arr[i + 1]));
-//             console.log(sum);
-//         }
-//         if (arr[i] === '/') {
-//             sum = calculator.div(sum, parseFloat(arr[i + 1]));
-//             console.log(sum);
-//         }
-//     }
-//     return sum;
-// }
 
