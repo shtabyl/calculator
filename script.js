@@ -60,6 +60,21 @@ const getNumber = (input, num) => {
     }
 }
 
+const returnPercent = (num) => {
+    if (num.textContent !== '') {
+        num.textContent = num.textContent / 100;
+    }
+}
+
+
+percentBtn.addEventListener('click', () => {
+    if (operator.textContent === '') {
+        returnPercent(num1);
+    } else {
+        returnPercent(num2);
+    }
+})
+
 numBtns.forEach((number) => number.addEventListener('click', (e) => {
     if (displayResult.textContent !== '') {
         clearCalc();
