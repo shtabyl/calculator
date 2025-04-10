@@ -16,6 +16,9 @@ const num2 = document.querySelector('#num2');
 
 const clearBtn = document.querySelector('.button_clear');
 const pointBtn = document.querySelector('.button_point');
+const percentBtn = document.querySelector('.button_percent');
+const negativeBtn = document.querySelector('.button_negative');
+const backspaceBtn = document.querySelector('.button_backspace');
 
 
 const calculator = (function () {
@@ -39,6 +42,7 @@ const clearCalc = () => {
     operatorBtns.forEach((operator) => operator.removeAttribute('disabled'));
     pointBtn.removeAttribute('disabled');
     moveNum2Back();
+    backspaceBtn.removeAttribute('disabled');
 }
 
 const getNumber = (input, num) => {
@@ -67,6 +71,7 @@ numBtns.forEach((number) => number.addEventListener('click', (e) => {
         operatorBtns.forEach((operator) => operator.setAttribute('disabled', true));
         resultBtn.removeAttribute('disabled');
     }
+    backspaceBtn.removeAttribute('disabled');
 }));
 
 operatorBtns.forEach((operatorBtn) => operatorBtn.addEventListener('click', (e) => {
@@ -90,6 +95,7 @@ operatorBtns.forEach((operatorBtn) => operatorBtn.addEventListener('click', (e) 
         operator.textContent += e.target.textContent;
     }
     moveNum2();
+    backspaceBtn.removeAttribute('disabled');
 }));
 
 clearBtn.addEventListener('click', () => {
@@ -102,6 +108,7 @@ resultBtn.addEventListener('click', (e) => {
     resultBtn.setAttribute('disabled', true);
     pointBtn.removeAttribute('disabled');
     operatorBtns.forEach((operator) => operator.removeAttribute('disabled'));
+    backspaceBtn.setAttribute('disabled', true);
     switch (operator.textContent) {
         case '+':
             displayResult.textContent = calculator.add(num1.textContent, num2.textContent);
@@ -122,6 +129,21 @@ resultBtn.addEventListener('click', (e) => {
             break;
     }
 });
+
+backspaceBtn.addEventListener('click', () => {
+    if (num1.textContent !== '' && operator.textContent === '') {
+        num1.textContent = num1.textContent.slice(0, num1.textContent.length - 1);
+        if (num1.textContent === '') {
+            num1.style.display = 'none';
+        }
+    } else if (displayResult.textContent === '') {
+        num2.textContent = num2.textContent.slice(0, num2.textContent.length - 1);
+        if (num2.textContent === '') {
+            num2.style.display = 'none';
+            resultBtn.setAttribute('disabled', true);
+        }
+    }
+})
 
 // Keyboard support
 document.addEventListener('keydown', (e) => {
