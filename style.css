@@ -176,3 +176,25 @@ body  {
         margin-top: 5px;
     }
 }
+
+.button_sub {
+    position: relative;
+    color: transparent;
+}
+
+.button_sub::after {
+    content: '–';
+    display: block;
+    position: absolute;
+    top: 23.5%;
+    margin: 0;
+    color: var(--clr-dark);
+}
+
+.button_sub:disabled {
+    color: transparent;
+}
+
+.button_sub:disabled::after {
+    color: rgb(177, 190, 199);
+}

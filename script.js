@@ -66,14 +66,41 @@ const returnPercent = (num) => {
     }
 }
 
+const swapNegative = (num) => {
+    if (num.textContent !== '') {
+        num.textContent = num.textContent * -1;
+    }
+}
 
 percentBtn.addEventListener('click', () => {
     if (operator.textContent === '') {
         returnPercent(num1);
-    } else {
+    } else if (displayResult.textContent === '') {
         returnPercent(num2);
+    } else {
+        returnPercent(displayResult);
+        const currentResult = displayResult.textContent;
+        clearCalc();
+        num1.style.display = 'inline';
+        num1.textContent += currentResult;
     }
-})
+});
+
+negativeBtn.addEventListener('click', () => {
+    if (operator.textContent === '') {
+        swapNegative(num1);
+    } else if (displayResult.textContent === ''){
+        const elemToRemove = displayInput.removeChild(num2);
+        displayNumSecondRow.insertBefore(elemToRemove, displayEqual);
+        swapNegative(num2);
+    } else {
+        swapNegative(displayResult);
+        const currentResult = displayResult.textContent;
+        clearCalc();
+        num1.style.display = 'inline';
+        num1.textContent += currentResult;
+    }
+});
 
 numBtns.forEach((number) => number.addEventListener('click', (e) => {
     if (displayResult.textContent !== '') {
@@ -178,7 +205,7 @@ document.addEventListener('keydown', (e) => {
             }
         });
     }
-    if (e.key === '+' || e.key === '-' || e.key === '*' || e.key === '/') {
+    if (e.key === '+' || e.key.charCodeAt() === 45 || e.key === '*' || e.key === '/') {
         operatorBtns.forEach((operator) => {
             if (operator.textContent === e.key) {
                 operator.click();
