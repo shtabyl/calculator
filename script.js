@@ -13,6 +13,8 @@ const displayResult = document.querySelector('.display__result');
 const num1 = document.querySelector('#num1');
 const operator = document.querySelector('#operator');
 const num2 = document.querySelector('#num2');
+const zeroBtn = document.querySelector('.button_zero');
+const displayParenthesis = document.querySelectorAll('.display__parenthesis');
 
 const clearBtn = document.querySelector('.button_clear');
 const pointBtn = document.querySelector('.button_point');
@@ -43,6 +45,7 @@ const clearCalc = () => {
     pointBtn.removeAttribute('disabled');
     moveNum2Back();
     backspaceBtn.removeAttribute('disabled');
+    hideParenthesis();
 }
 
 const getNumber = (input, num) => {
@@ -54,9 +57,18 @@ const getNumber = (input, num) => {
         num.style.display = 'inline';
         num.textContent += '.';
         pointBtn.setAttribute('disabled', true);
+    } else if (input === zeroBtn && num.textContent === '0') {
+        num.style.display = 'inline';    
+        num.textContent = '0';
     } else {
-        num.style.display = 'inline';
-        num.textContent += input.textContent;
+        if (num.textContent === '0') {
+            num.textContent = '';
+            num.style.display = 'inline';
+            num.textContent += input.textContent;
+        } else {
+            num.style.display = 'inline';
+            num.textContent += input.textContent;
+        }
     }
 }
 
@@ -70,6 +82,18 @@ const swapNegative = (num) => {
     if (num.textContent !== '') {
         num.textContent = num.textContent * -1;
     }
+}
+
+const showParenthesis = () => {
+    displayParenthesis.forEach((parenthesis) => {
+        parenthesis.style.display = 'inline';
+    });
+}
+
+const hideParenthesis = () => {
+    displayParenthesis.forEach((parenthesis) => {
+        parenthesis.style.display = 'none';
+    });
 }
 
 percentBtn.addEventListener('click', () => {
@@ -90,9 +114,8 @@ negativeBtn.addEventListener('click', () => {
     if (operator.textContent === '') {
         swapNegative(num1);
     } else if (displayResult.textContent === ''){
-        const elemToRemove = displayInput.removeChild(num2);
-        displayNumSecondRow.insertBefore(elemToRemove, displayEqual);
         swapNegative(num2);
+        showParenthesis();
     } else {
         swapNegative(displayResult);
         const currentResult = displayResult.textContent;
@@ -189,7 +212,7 @@ backspaceBtn.addEventListener('click', () => {
 
 // Keyboard support
 document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' || e.key === 'Delete' || e.key.charCodeAt() === 67 && e.key !== 'Enter') {
+    if ((e.key === 'Escape' || e.key === 'Delete' || e.key.charCodeAt() === 67) && e.key !== 'Enter') {
         clearCalc();
     }
     if (e.key === 'Enter' || e.key === '=' || e.key.charCodeAt() === 61) {
